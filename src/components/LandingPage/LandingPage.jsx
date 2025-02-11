@@ -1,21 +1,17 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import TopNavBar from '../navBar/TopNavBar';
+import LeftNavBar from '../pages/LeftNavBar';
 
-export default function LandingPage() {
+export default function LandingPage({ theme, setTheme }) {
     return (
-        <div className="flex flex-col lg:flex-row h-screen w-full">
-            {/* Left Side (Image) */}
-            <div className="flex justify-center items-end w-full lg:items-center lg:h-full lg:w-1/2">
-                <img
-                    src="./images/logo_bg_white.png"
-                    alt="Logo"
-                    className="object-contain"
-                />
-            </div>
-
-            {/* Right Side (Forms) */}
-            <div className="flex flex-col justify-center w-full lg:w-1/2 h-1/2 lg:h-full">
-                <Outlet />
+        <div className={`w-[100vw] h-[100vh] ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-black'}`}>
+            <TopNavBar theme={theme} setTheme={setTheme} />
+            <div className="flex">
+                <LeftNavBar theme={theme} />
+                <div className="w-[85vw] p-6">
+                    <Outlet /> {/* This will render either MainPage or FavoritePlaces based on the route */}
+                </div>
             </div>
         </div>
     );
